@@ -1,15 +1,20 @@
 package com.sanalberto.svp.webappempresa25;
 
 import java.io.*;
+import java.util.ArrayList;
+
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import services.DepartamentoService;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
+@WebServlet(name = "helloServlet", value = "/listDepsServlet")
 public class HelloServlet extends HttpServlet {
     private String message;
-
+    private DepartamentoService departamentoService = new DepartamentoService();
+    ArrayList<String> deps;
     public void init() {
-        message = "Hello World!";
+        message = "Lista departamentos";
+        deps = departamentoService.listarDepartamentos();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -19,6 +24,9 @@ public class HelloServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
+        for (String dep : deps) {
+            out.println("<p>" + dep + "</p>");
+        }
         out.println("</body></html>");
     }
 

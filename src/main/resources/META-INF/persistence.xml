@@ -4,6 +4,17 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
   <persistence-unit name="default">
-
+    <class>entities.DepartamentosEntity</class>
+    <class>entities.EmpleadosEntity</class>
+    <properties>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3307/pruebaIJ"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.password" value="admin"/>
+      <!-- Para que cuando se ejecute un método de hibernate que interactúa con la base de datos
+       me muestre por pantalla el sql que se ha autogenerado-->
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+    </properties>
   </persistence-unit>
 </persistence>
