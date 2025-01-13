@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import services.DepartamentoService;
 
 @WebServlet(name = "helloServlet", value = "/listDepsServlet")
-public class HelloServlet extends HttpServlet {
+public class ListDeps extends HttpServlet {
     private String message;
     private DepartamentoService departamentoService = new DepartamentoService();
     ArrayList<String> deps;
