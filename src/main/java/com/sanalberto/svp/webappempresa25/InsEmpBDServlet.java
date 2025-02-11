@@ -2,6 +2,7 @@ package com.sanalberto.svp.webappempresa25;
 
 import dto.EmpleadoDTO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,14 +12,14 @@ import services.EmpleadoServices;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="InsEmpBDServlet", value="/insertarEmpBD")
+@WebServlet("/insertarEmpBD")
+@MultipartConfig
 public class InsEmpBDServlet extends HttpServlet {
     private String message;
     private EmpleadoServices empleadoServices = new EmpleadoServices();
 
     public void init() {
         message = "Introduciendo el nuevo empleado";
-
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,14 +30,9 @@ public class InsEmpBDServlet extends HttpServlet {
         empleado.setOficio(request.getParameter("oficio"));
         empleado.setApeDir(request.getParameter("jefe"));
         empleado.setNombreDep(request.getParameter("nombreDep"));
-        String respuestaBD = empleadoServices.insertarEmpleado(empleado);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("<p>" + respuestaBD + "</p>");
-        out.println("</body></html>");
+        message = empleadoServices.insertarEmpleado(empleado);
+        response.setContentType("text/plain");
+        response.getWriter().write(message);
     }
     public void destroy() {
     }

@@ -1,10 +1,12 @@
+
+
 function enviarFormulario(event) {
     event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
 
     var formData = new FormData(document.getElementById("miFormulario"));
-    alert(formData.get("id"));
+    alert(formData.get("idEmp"));
 
-    fetch("EmpleadoInsertado", {
+    fetch("insertarEmpBD", {
         method: "POST",
         body: formData
     })
@@ -16,3 +18,6 @@ function enviarFormulario(event) {
             console.error("Error:", error);
         });
 }
+
+const form = document.getElementById("miFormulario")
+form.addEventListener("submit", enviarFormulario)
